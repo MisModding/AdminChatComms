@@ -1,0 +1,71 @@
+{
+    "folders": [
+        {
+        	"name":"Source",
+            "path": "./Source"
+        }
+    ],
+    "settings": {
+		"better-comments.tags": [
+			{
+				"tag": "!",
+				"color": "#FF2D00",
+				"strikethrough": false,
+				"backgroundColor": "transparent"
+			},
+			{
+				"tag": "?",
+				"color": "#3498DB",
+				"strikethrough": false,
+				"backgroundColor": "transparent"
+			},
+			{
+				"tag": "//",
+				"color": "#474747",
+				"strikethrough": true,
+				"backgroundColor": "transparent"
+			},
+			{
+				"tag": "todo",
+				"color": "#FF8C00",
+				"strikethrough": false,
+				"backgroundColor": "transparent"
+			},
+			{
+				"tag": ">>",
+				"color": "#aeaeae",
+				"strikethrough": false,
+				"backgroundColor": "transparent"
+			},
+			{
+				"tag": "|",
+				"color": "#aeaeae",
+				"strikethrough": false,
+				"backgroundColor": "transparent"
+			},
+			{
+				"tag": "*",
+				"color": "#98C379",
+				"strikethrough": false,
+				"backgroundColor": "transparent"
+			}
+		],
+		"Lua.runtime.version": "Lua 5.1",
+		"Lua.workspace.library": {
+			"../.lua.compleations.d": true
+		},
+		"Lua.diagnostics.disable": [
+			"lowercase-global",
+			"unused-local"
+		],
+	},
+	"extensions": {
+		"recommendations": [
+			"aaron-bond.better-comments"
+		]
+	},
+	"recommendations": [
+		"aaron-bond.better-comments",
+		"gruntfuggly.todo-tree"
+	],
+}
