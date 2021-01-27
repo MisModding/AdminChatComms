@@ -1,6 +1,7 @@
 name: Build Workshop Release
 
 on:
+  workflow_dispatch:
   release:
     types: [published]
 
