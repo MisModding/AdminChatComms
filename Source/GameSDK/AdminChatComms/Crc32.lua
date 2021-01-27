@@ -165,3 +165,7 @@ function Crc32(str, init_value, asHex)
 	end
     return crc
 end
+
+function isCrc32(str)
+    return nil ~= str:find("^%x%x%x%x%x%x%x%x$")
+end

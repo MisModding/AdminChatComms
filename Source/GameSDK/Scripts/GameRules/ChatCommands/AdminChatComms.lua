@@ -171,7 +171,7 @@ ChatCommands['!give'] = function(playerId, command)
     local steamid = player.player:GetSteam64Id()
 
     if IsAdminPlayer(steamid) then
-        local allGiven,result = mSpawnTools:GiveItemSet(playerId, command)
+        local allGiven, result = mSpawnTools:GiveItemSet(playerId, command)
         if not allGiven then
             if result then
                 g_gameRules.game:SendTextMessage(4, playerId, result);
@@ -179,6 +179,37 @@ ChatCommands['!give'] = function(playerId, command)
         end
     end
     g_gameRules.game:SendTextMessage(4, playerId, command);
+end
+
+-- !givestack <item_name>
+-- Gives the <item_name> as a full stack if stackable or magazine
+-- <item_name> can be any valid item name in the game -ex. Lumber
+-- you can spawn multiple stacks by delimiteing classnames with `;`
+-- eg: !givestack Lumber;Lumber;Lumber
+ChatCommands["!givestack"] = function(playerId, command)
+    local player = System.GetEntity(playerId)
+    local steamId = player.player:GetSteam64Id()
+    if IsAdminPlayer(steamId) then
+
+        -- Assign `;` delimited command to a table
+        local items = {}
+        for c in (command .. ";"):gmatch("([^;]*);") do
+            table.insert(items, c)
+        end
+        for i, v in pairs(items) do
+            g_gameRules.game:SendTextMessage(4, playerId, v);
+            -- Add the item requested to the invoking players inventory
+            local item = ISM.GiveItem(playerId, v, false)
+            if item then
+                if item.item:IsStackable() or item.item:IsMagazine() then
+                    item.item:SetStackCount(item.item:GetMaxStackSize())
+                end
+                if item.item:IsDestroyable() then
+                    item.item:SetHealth(item.item:GetMaxHealth())
+                end
+            end
+        end
+    end
 end
 
 -- !heal
@@ -493,7 +524,6 @@ ChatCommands['!airdrop'] = function(playerId, command)
     end
 end
 
-
 --[[
     ! Updated: 27/01/2021 12:19:57 [Theros]
     ? Implemented SpawnVehical Command [based on Cuartas method, updated to handle skin name not crc32str]
@@ -505,16 +535,16 @@ ChatCommands["!spawnvehicle"] = function(playerId, command)
     if IsAdminPlayer(player) then
         -- Determines if the command has a skin
         -- you must provide a valid skin name, just don't type the skin
-        local pattern = '.*%s.*';
-        local vehiclename = '';
-        local skin = '';
-
-        if (string.match(command, pattern)) then
-            vehiclename, skin = string.match(command, '(.*) (.*)');
-            skin = Crc32(skin, nil, true)
+        local cmd = string.split(command)
+        if cmd and table_size(cmd) == 2 then
+            vehiclename = cmd[1]
+            skin = cmd[2]
         else
-            vehiclename = command;
-            skin = '';
+            vehiclename = command
+        end
+        -- convert the skin name to Crc32str
+        if skin ~= "" and (not isCrc32(skin)) then
+            skin = Crc32(skin, nil, true)
         end
 
         -- Get a coordinate 5m in front of the player
@@ -525,7 +555,7 @@ ChatCommands["!spawnvehicle"] = function(playerId, command)
 
         -- Set the vehicle parameters
         local spawnParams = {};
-        spawnParams.class = command;
+        spawnParams.class = vehiclename;
         spawnParams.orientation = player:GetDirectionVector();
         spawnParams.position = vPointingPosition;
 
