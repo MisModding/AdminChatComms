@@ -532,7 +532,9 @@ end
 ChatCommands["!spawnvehicle"] = function(playerId, command)
     local player = System.GetEntity(playerId);
     local steamid = player.player:GetSteam64Id()
-    if IsAdminPlayer(player) then
+    if IsAdminPlayer(steamid) then
+        local vehiclename = ""
+        local skin = ""
         -- Determines if the command has a skin
         -- you must provide a valid skin name, just don't type the skin
         local cmd = string.split(command)
