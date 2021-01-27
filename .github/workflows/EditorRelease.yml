@@ -1,6 +1,7 @@
 name: Build Editor Release
 
 on:
+  workflow_dispatch:
   release:
     types: [published]
 
