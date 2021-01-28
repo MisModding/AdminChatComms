@@ -545,8 +545,8 @@ ChatCommands["!spawnvehicle"] = function(playerId, command)
             vehiclename = command
         end
         -- convert the skin name to Crc32str
-        if skin ~= "" and (not isCrc32(skin)) then
-            skin = Crc32(skin, nil, true)
+        if skin ~= "" and (not isSkinCrc32(skin)) then
+            skin = getSkinCrc32(skin) or ""
         end
 
         -- Get a coordinate 5m in front of the player
