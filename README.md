@@ -25,6 +25,11 @@ Here are the commands themselves:
 - !bases_dump [logs all parts of all bases - can lead to massive lag as it's being done, use sparingly!]
 - !base_delete [deletes the nearest base - SUPER CAREFUL!]
 - !give [gives you an item to inventory, use script names - link below]
+    - can also accept an item count, example: !give applefresh*5            -> gives 5 apples
+    - can also give a set of items, use `;` to delimit items, | to specify a child item, and * specifies the amount
+        example: !give DuffelBag|762x30*4;AKM|762x30  -> gives DuffelBag containing x5 762x30 mags and AKM with a loaded mag
+- !givestack [gives you a full stack of an item]
+    - can also give multiple stacks by passing a `;` delimited string of classnames eg: `!givestack Lumber;Bandage`
 - !spawn [spawns an item 2m in front of you, naming same as !give]
 - !spawnent [spawns entities, such as vehicles or explosive barrels]
 - !heal [heals the user to 100 HP]
@@ -37,6 +42,8 @@ Here are the commands themselves:
 - !tp [teleports you to coordinates]
 - !time [forces a time on the server, e.g. 15 is 3 p.m.]
 - !weather [forces a weather pattern on the server, use numbers or full names]
+- !spawnvehical [classname] [spawn a vehical infront of the player]
+    - optionally provide a valid skin name as the last parameter to skin the vehical
 
 ---
 
