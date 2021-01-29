@@ -44,7 +44,8 @@ Here are the commands themselves:
 - !weather [forces a weather pattern on the server, use numbers or full names]
 - !spawnvehical [classname] [spawn a vehical infront of the player]
     - optionally provide a valid skin name as the last parameter to skin the vehical
-
+       -  find skins using: [steamdb miscreated items](https://steamdb.info/app/299740/items/)
+       -  convert the skin Class_Name to crc32 using this [Crc32 Convert](https://emn178.github.io/online-tools/crc32.html)
 ---
 
 Spafbi's MisInformation, which has all script names of items and tracks differences between game versions: 
