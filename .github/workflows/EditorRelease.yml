@@ -14,17 +14,17 @@ jobs:
       - uses: papeloto/action-zip@v1
         with:
           files: Source/GameSDK/
-          dest: ${{ repo_name }}-editor-build.pak
+          dest: $repo_name-editor-build.pak
       - uses: actions/upload-artifact@v1
         with:
           name: EditorRelease
-          path: ${{ github.workspace }}/${{ repo_name }}-editor-build.pak
+          path: ${{ github.workspace }}/$repo_name-editor-build.pak
       - name: PublishRelease
         uses: fnkr/github-action-ghr@ghr-options
         if: startsWith(github.ref, 'refs/tags/')
         env:
           GHR_TITLE: Latest Release
           GHR_BODY: Latest Pak files
-          GHR_PATH: ${{ repo_name }}-editor-build.pak
+          GHR_PATH: $repo_name-editor-build.pak
           GHR_REPLACE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
